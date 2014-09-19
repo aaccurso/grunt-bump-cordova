@@ -1,4 +1,4 @@
-# grunt-bump-cordova-cordova
+# grunt-bump-cordova
 
 > Bump package version, create tag, commit, push ...
 
