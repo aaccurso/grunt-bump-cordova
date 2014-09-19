@@ -104,7 +104,7 @@ module.exports = function(grunt) {
                 gitVersion = gitVersion && parsedVersion;
                 version = exactVersionToSet || gitVersion || semver.inc(parsedVersion, versionType || 'patch');
                 // Removes prerelease tag
-                return version.slice(0, version.indexOf('-'));
+                return !~version.indexOf('-') ? version : version.slice(0, version.indexOf('-'));
             });
             content = xmlBuilder.buildObject(result);
           });
