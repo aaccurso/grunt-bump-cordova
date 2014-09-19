@@ -1,38 +1,18 @@
 {
-  "name": "grunt-bump",
+  "name": "grunt-bump-cordova",
   "description": "Bump package version",
-  "version": "0.0.15",
-  "homepage": "https://github.com/vojtajina/grunt-bump",
+  "version": "0.1.0",
+  "homepage": "https://github.com/aaccurso/grunt-bump-cordova",
   "author": {
-    "name": "Vojta Jína",
-    "email": "vojta.jina@gmail.com"
+    "name": "Alan Accurso",
+    "email": "accurso.alan@gmail.com"
   },
-  "contributors": [
-    "Eddie Monge <eddie@eddiemonge.com>",
-    "Mathias Paumgarten <paumgarten@soapcreative.com>",
-    "Elfrey Shira <elfrey.shira@opower.com>",
-    "Jonas Rabbe <jonas.rabbe@gmail.com>",
-    "adam j. sontag <ajpiano@ajpiano.com>",
-    "travis4all <travis4all@diamon.dz>",
-    "Adam Biggs <adam.biggs@lightmaker.com>",
-    "Gavin <gavin@kodekoan.com>",
-    "Jarrett Drouillard <jarrett@thestyl.us>",
-    "Mathias Paumgarten <mail@mathias-paumgarten.com>",
-    "Mayhem <stepien.nicolas@gmail.com>",
-    "Michael Hellein <themichaek@gmail.com>",
-    "Mário Gonçalves <mario.mc.goncalves@gmail.com>",
-    "RobinQu <robinqu@gmail.com>",
-    "Snugug <snugug@gmail.com>",
-    "angleman <angleman@users.noreply.github.com>",
-    "cattail <zhongchiyu@gmail.com>",
-    "ylesaout <ylesaout@gmail.com>"
-  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/vojtajina/grunt-bump.git"
+    "url": "git://github.com/aaccurso/grunt-bump-cordova.git"
   },
   "bugs": {
-    "url": "https://github.com/vojtajina/grunt-bump/issues"
+    "url": "https://github.com/aaccurso/grunt-bump-cordova/issues"
   },
   "main": "tasks/bump.js",
   "engines": {
@@ -59,6 +39,9 @@
     "load-grunt-tasks": "^0.4.0"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "cordova",
+    "bump",
+    "version"
   ]
 }

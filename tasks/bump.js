@@ -10,6 +10,7 @@
  * @author Vojta Jina <vojta.jina@gmail.com>
  * @author Mathias Paumgarten <mail@mathias-paumgarten.com>
  * @author Adam Biggs <email@adambig.gs>
+ * @author Alan Accurso <accurso.alan@gmail.com>
  */
 
 'use strict';
@@ -26,13 +27,13 @@ module.exports = function(grunt) {
   grunt.registerTask('bump', DESC, function(versionType, incOrCommitOnly) {
     var opts = this.options({
       bumpVersion: true,
-      files: ['package.json'],
+      files: ['package.json', 'bower.json', 'config.xml'],
       updateConfigs: [], // array of config properties to update (with files)
       commit: true,
-      commitMessage: 'Release v%VERSION%',
-      commitFiles: ['package.json'], // '-a' for all files
+      commitMessage: 'Release %VERSION%',
+      commitFiles: ['package.json', 'bower.json', 'config.xml'], // '-a' for all files
       createTag: true,
-      tagName: 'v%VERSION%',
+      tagName: '%VERSION%',
       tagMessage: 'Version %VERSION%',
       push: true,
       pushTo: 'upstream',
