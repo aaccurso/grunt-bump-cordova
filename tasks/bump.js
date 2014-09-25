@@ -103,6 +103,9 @@ module.exports = function(grunt) {
             result.widget.$.version = result.widget.$.version.replace(XML_VERSION_REGEXP, function (match, parsedVersion) {
                 gitVersion = gitVersion && parsedVersion;
                 version = exactVersionToSet || gitVersion || semver.inc(parsedVersion, versionType || 'patch');
+                if (result.widget.$['android-versionCode']) {
+                  result.widget.$['android-versionCode'] = parseInt(result.widget.$['android-versionCode']) + 1;
+                }
                 // Removes prerelease tag
                 return !~version.indexOf('-') ? version : version.slice(0, version.indexOf('-'));
             });
