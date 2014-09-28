@@ -13,6 +13,10 @@ module.exports = (grunt) ->
 
     'auto-release': options: checkTravisBuild: false
     'npm-contributors': options: commitMessage: 'chore: update contributors'
+    bump:
+      options:
+        files: ['package.json']
+        commitFiles: ['package.json']
 
   # Actually load this plugin's task. Mainly for testing
   grunt.loadTasks('tasks')
