@@ -106,6 +106,9 @@ module.exports = function(grunt) {
                 // Removes prerelease tag
                 return !~version.indexOf('-') ? version : version.slice(0, version.indexOf('-'));
             });
+            if (result.widget.$['android-versionCode']) {
+              result.widget.$['android-versionCode'] = parseInt(result.widget.$['android-versionCode']) + 1;
+            }
             content = xmlBuilder.buildObject(result);
           });
         } else {
