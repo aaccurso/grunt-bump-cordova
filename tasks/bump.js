@@ -98,7 +98,7 @@ module.exports = function(grunt) {
         var fileString = grunt.file.read(file);
         var content;
 
-        if ( file.indexOf('config.xml') === file.length - 'config.xml'.length ) {
+        if (/config.xml$/.test(file)) {
           parseString(fileString, function (err, result) {
             result.widget.$.version = result.widget.$.version.replace(XML_VERSION_REGEXP, function (match, parsedVersion) {
                 gitVersion = gitVersion && parsedVersion;
