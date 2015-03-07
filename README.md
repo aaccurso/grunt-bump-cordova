@@ -2,6 +2,8 @@
 
 > Bump package version, create tag, commit, push ...
 
+> Same as grunt-bump package but with cordova's config.xml support.
+
 ## Getting Started
 This plugin requires Grunt.
 
