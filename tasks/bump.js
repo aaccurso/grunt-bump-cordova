@@ -109,6 +109,9 @@ module.exports = function(grunt) {
             if (result.widget.$['android-versionCode']) {
               result.widget.$['android-versionCode'] = parseInt(result.widget.$['android-versionCode']) + 1;
             }
+            if (result.widget.$['ios-CFBundleVersion']) {
+              result.widget.$['ios-CFBundleVersion'] = parseInt(result.widget.$['ios-CFBundleVersion']) + 1;
+            }
             content = xmlBuilder.buildObject(result);
           });
         } else {
