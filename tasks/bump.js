@@ -103,7 +103,8 @@ module.exports = function(grunt) {
           }
         };
 
-        if (/config.xml$/.test(file)) {
+        // Supports config.xml, config.arm.xml and config.x86.xml
+        if (/config(.)*\.xml$/.test(file)) {
           parseString(fileString, function (err, result) {
             result.widget.$.version = result.widget.$.version.replace(XML_VERSION_REGEXP, function (match, parsedVersion) {
                 gitVersion = gitVersion && parsedVersion;
