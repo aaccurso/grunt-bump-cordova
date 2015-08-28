@@ -97,6 +97,11 @@ module.exports = function(grunt) {
         var version = null;
         var fileString = grunt.file.read(file);
         var content;
+        var bumpIntegerOnWidget = function (result, integer) {
+          if (result.widget.$[integer]) {
+            result.widget.$[integer] = parseInt(result.widget.$[integer]) + 10;
+          }
+        };
 
         if (/config.xml$/.test(file)) {
           parseString(fileString, function (err, result) {
@@ -106,12 +111,14 @@ module.exports = function(grunt) {
                 // Removes prerelease tag
                 return !~version.indexOf('-') ? version : version.slice(0, version.indexOf('-'));
             });
-            if (result.widget.$['android-versionCode']) {
-              result.widget.$['android-versionCode'] = parseInt(result.widget.$['android-versionCode']) + 1;
-            }
-            if (result.widget.$['ios-CFBundleVersion']) {
-              result.widget.$['ios-CFBundleVersion'] = parseInt(result.widget.$['ios-CFBundleVersion']) + 1;
-            }
+            // Bumps version code
+            ['android:versionCode',
+              'android-versionCode',
+              'ios:CFBundleVersion',
+              'ios-CFBundleVersion']
+              .forEach(function (version) {
+                bumpIntegerOnWidget(result, version);
+              });
             content = xmlBuilder.buildObject(result);
           });
         } else {
