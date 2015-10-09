@@ -44,7 +44,6 @@ module.exports = function(grunt) {
       grunt.verbose.writeln('Only incrementing the version.');
 
       opts.commit = false;
-      opts.createTag = false;
       opts.push = false;
     }
 
@@ -197,7 +196,18 @@ module.exports = function(grunt) {
           grunt.fatal('Can not create the tag:\n  ' + stderr);
         }
         grunt.log.ok('Tagged as "' + tagName + '"');
-        next();
+        if ( incOrCommitOnly === 'bump-only' ){  // push tag only
+          exec('git push ' + opts.pushTo + ' ' + tagName, function(err,stdout,stderr){
+            if (err) {
+              grunt.fatal('Can not push the tag:\n  ' + stderr);
+            }else{ 
+              grunt.log.ok('Tag ' + tagName + ' successfully pushed to ' + opts.pushTo);
+            }
+            next();
+          })
+        }else{ 
+          next();
+        }
       });
     });
 
@@ -226,3 +236,4 @@ module.exports = function(grunt) {
   DESC = 'Commit, tag, push without incrementing the version.';
   grunt.registerTask('bump-commit', DESC, 'bump::commit-only');
 };
+
