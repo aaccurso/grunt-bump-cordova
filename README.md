@@ -37,7 +37,7 @@ grunt.initConfig({
       push: true,
       pushTo: 'upstream',
       gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
-      androidBumpIncrement: 10
+      androidVersionCodeIncrement: 10
     }
   },
 })
