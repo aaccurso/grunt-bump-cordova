@@ -37,7 +37,8 @@ module.exports = function(grunt) {
       tagMessage: 'Version %VERSION%',
       push: true,
       pushTo: 'upstream',
-      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+      androidBumpIncrement: 10,
     });
 
     if (incOrCommitOnly === 'bump-only') {
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
         var content;
         var bumpIntegerOnWidget = function (result, integer) {
           if (result.widget.$[integer]) {
-            result.widget.$[integer] = parseInt(result.widget.$[integer]) + 10;
+            result.widget.$[integer] = parseInt(result.widget.$[integer]) + opts.androidBumpIncrement;
           }
         };
 
