@@ -36,7 +36,8 @@ grunt.initConfig({
       tagMessage: 'Version %VERSION%',
       push: true,
       pushTo: 'upstream',
-      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+      gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+      androidBumpIncrement: 10
     }
   },
 })
@@ -117,6 +118,11 @@ Default value: `--tags --always --abbrev=1 --dirty=-d`
 
 Options to use with `$ git describe`
 
+#### options.androidVersionCodeIncrement
+Type: `Integer`
+Default value: `10`
+
+Increment `android-versionCode` in cordova `config.xml` by the value of `options.androidVersionCodeIncrement`
 
 ### Usage Examples
 
