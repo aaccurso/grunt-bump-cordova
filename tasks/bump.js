@@ -17,9 +17,7 @@
 
 var semver = require('semver');
 var exec = require('child_process').exec;
-var xml2js = require('xml2js');
-var parseString = xml2js.parseString;
-var xmlBuilder = new xml2js.Builder();
+var et = require('elementtree');
 
 module.exports = function(grunt) {
 
@@ -98,31 +96,31 @@ module.exports = function(grunt) {
         var version = null;
         var fileString = grunt.file.read(file);
         var content;
-        var bumpIntegerOnWidget = function (result, integer) {
-          if (result.widget.$[integer]) {
-            result.widget.$[integer] = parseInt(result.widget.$[integer]) + opts.androidVersionCodeIncrement;
+        var bumpIntegerOnWidget = function (attributes, integer) {
+          if (attributes[integer]) {
+            attributes[integer] = parseInt(attributes[integer]) + opts.androidVersionCodeIncrement;
           }
         };
 
         // Supports config.xml, config.arm.xml and config.x86.xml
         if (/config(.)*\.xml$/.test(file)) {
-          parseString(fileString, function (err, result) {
-            result.widget.$.version = result.widget.$.version.replace(XML_VERSION_REGEXP, function (match, parsedVersion) {
-                gitVersion = gitVersion && parsedVersion;
-                version = exactVersionToSet || gitVersion || semver.inc(parsedVersion, versionType || 'patch');
-                // Removes prerelease tag
-                return !~version.indexOf('-') ? version : version.slice(0, version.indexOf('-'));
-            });
-            // Bumps version code
-            ['android:versionCode',
-              'android-versionCode',
-              'ios:CFBundleVersion',
-              'ios-CFBundleVersion']
-              .forEach(function (version) {
-                bumpIntegerOnWidget(result, version);
-              });
-            content = xmlBuilder.buildObject(result);
+          var doc = new et.ElementTree(et.XML(fileString));
+          var root = doc.getroot();
+          root.attrib.version = root.attrib.version.replace(XML_VERSION_REGEXP, function (match, parsedVersion) {
+            gitVersion = gitVersion && parsedVersion;
+            version = exactVersionToSet || gitVersion || semver.inc(parsedVersion, versionType || 'patch');
+            // Removes prerelease tag
+            return !~version.indexOf('-') ? version : version.slice(0, version.indexOf('-'));
           });
+          // Bumps version code
+          ['android:versionCode',
+            'android-versionCode',
+            'ios:CFBundleVersion',
+            'ios-CFBundleVersion']
+            .forEach(function (version) {
+              bumpIntegerOnWidget(root.attrib, version);
+            });
+          content = doc.write({indent: 4});
         } else {
           content = fileString.replace(VERSION_REGEXP, function(match, prefix, parsedVersion, suffix) {
             gitVersion = gitVersion && parsedVersion + '-' + gitVersion;
